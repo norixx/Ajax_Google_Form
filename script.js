@@ -2,14 +2,13 @@
 
   const formControl = (() => {
 
-    const formSubmit = () => {
-
-      const $gForm = $('#g-form')
+    const formSubmit = ($gForm) => {
 
       $gForm.on('submit', (e) => {
         e.preventDefault()
 
         // 送信するデータ Google Formのソースコードから抜いてくる
+        // ★自分のフィールドの内容に差し替えること
         const submitData = {
           'entry.1074108472': $('[name=entry-1074108472]').val(),
           'entry.1366130775': $('[name=entry-1366130775]').val(),
@@ -17,6 +16,7 @@
         }
 
         $.ajax({
+          // ★自分のGoogle FormのURLに差し替えること
           url        : 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSdnVPLqPExr4iLBja_4nmyEt_rsT6ceZOnA7ivAmpJZRVm7kQ/formResponse',
           method     : 'post',
           crossDomain: true,
@@ -37,8 +37,8 @@
 
     }
 
-    const init = () => {
-      formSubmit();
+    const init = ($gForm) => {
+      formSubmit($gForm);
     }
 
     return { init }
@@ -46,7 +46,8 @@
   })();
 
   if ($('#g-form').length !== 0) {
-    formControl.init()
+    // ★自分のフォームのIDに差し替えること
+    formControl.init($('#g-form'))
   }
 
 })(jQuery);
